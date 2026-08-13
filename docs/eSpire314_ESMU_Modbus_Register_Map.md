@@ -221,14 +221,33 @@ definition and the formula to expand it per string/cell.
 
 ## 7. What's implemented in this repo vs. still open
 
+Templates now follow `keystone-controller-logic`'s actual schema
+(`{version, device, telemetry[], commands[]}`, per `src/telemetry/templateAdapter.ts`),
+verified against a ported copy of its structural validator in
+`src/__tests__/templateConformance.spec.ts` — not the ad hoc shape this repo started
+with.
+
 | Area | File | Status |
 |---|---|---|
-| System discrete-input alarms (§4.1) | `src/templates/eSpire314_ESMU_SystemAlarms_DI.json` | Filled in, MEDIUM confidence |
-| Control registers 500–502 (§5) | `src/templates/eSpire314_ESMU_Control_HR.json` | Filled in, HIGH confidence for 500/501/502; 503–530 left `TODO` |
-| System telemetry (§6.2) | `src/templates/eSpire314_ESMU_SystemTelemetry_IR.json` | Filled in, MEDIUM confidence |
+| System discrete-input alarms (§4.1, 80 points) | `src/templates/eSpire314_ESMU_ss_TEMPLATE.json` (`telemetry[]`, `function: "DI"`) | Filled in, MEDIUM confidence for addresses. **Not actually pollable yet** — see §8, `keystone-controller-logic` has no discrete-input (`02H`) `ModbusNumericType`. |
+| Control registers 500–502 (§5) | same file, `commands[]` | Filled in, HIGH confidence for 500/501/502; 503–530 left `TODO` |
+| System telemetry (§6.2, incl. System State enum) | same file, `telemetry[]` | Filled in, MEDIUM confidence (HIGH for System State/comm faults) |
 | Per-string alarms (§4.2) / per-string+per-cell telemetry (§6.4) | not yet templated as individual points | Documented as formulas above; expand once the block-offset ambiguity is resolved |
 | Fault classification + recovery | `src/coreControl/espire314FaultRecovery.ts` | Rewritten around the real System State enum (§6.3) and control registers 501/502 |
-| ss-model numbers for `keystone-controller-logic`-style telemetry export | `src/telemetry/espire314ReportingModels.ts` | Still `TODO` — this is an internal Keystone EMS naming decision, not something in the vendor PDF |
+| ss-model numbers for `keystone-controller-logic`-style telemetry export | `src/telemetry/espire314ReportingModels.ts` + each point's `ss40k.model: "TODO"` | Still `TODO` — this is an internal Keystone EMS naming decision, not something in the vendor PDF |
+
+## 8. Gap found by comparing against `keystone-controller-logic`'s other product templates
+
+`keystone-controller-logic/src/types.ts` defines `ModbusNumericType` as only
+`HR*`/`IR*`/`C` (holding registers, input registers, coils) — **no discrete-input
+(`02H`) member**, and `reader.ts` has no `02H` request path. Every other product
+template in that repo represents its alarm bits by packing them into an `HR`/`IR`
+word with `bitfieldStatus`, because none of those devices expose alarms as literal
+Modbus discrete-input registers the way ESMU does. This repo's 80 system-alarm points
+use `"function": "DI"` as an explicit intent marker (each carries a `notes` field
+saying so) — they're structurally valid but need a `keystone-controller-logic` core
+change (new `ModbusNumericType` member + `reader.ts` wiring) before they can actually
+be read.
 
 **Before any of registers 500–502 are used to actually open/close a contactor or reset
 faults on real hardware, do a side-by-side check against the source PDF pages cited

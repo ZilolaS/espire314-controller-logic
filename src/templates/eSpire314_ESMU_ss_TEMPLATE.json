@@ -1,0 +1,1768 @@
+{
+  "version": "2",
+  "device": {
+    "vendor": "Unidentified OEM (doc code GE-Q730-1-141-A)",
+    "model": "ESMU",
+    "protocol": "modbus-tcp",
+    "name": "eSpire314_ESMU",
+    "sourceFormat": "vendor-pdf-extraction",
+    "defaultByteOrder": "BE",
+    "defaultWordOrder32": "ABCD",
+    "notes": "Treated as the eSpire 314 register map per the request that produced this template - the source PDF never uses the name 'eSpire' or '314', only 'ESMU'. Extracted from a bilingual table-heavy PDF (docs/eSpire314_ESMU_Modbus_Register_Map.md has full notes, per-point 'confidence' field mirrors that doc's tiers: high/medium/low). System alarms (SystemAlarm_*) are true Modbus discrete-input reads (function 02H) which keystone-controller-logic's reader/compiler does not yet support (see ModbusNumericType in src/types.ts) - each alarm point's 'notes' field flags this explicitly. Per-string alarms (base 100*(N+1), 88 regs) and per-string/per-cell telemetry (base 100+3000*(N-1), 2991 regs, up to 700 cells) are NOT enumerated as individual points here - see the register map doc section 4.2/6.4 for the address formulas."
+  },
+  "telemetry": [
+    {
+      "id": "SystemBreakerStatus",
+      "description": "System circuit breaker status",
+      "category": "Status",
+      "pollClass": "fast",
+      "function": "IRUS",
+      "address": 1,
+      "confidence": "high",
+      "enumStatus": {
+        "0": "Open",
+        "1": "Closed"
+      },
+      "ss40k": {
+        "name": "SystemBreakerStatus",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemTotalVoltage",
+      "description": "System total voltage",
+      "category": "Telemetry",
+      "pollClass": "fast",
+      "function": "IRUS",
+      "address": 2,
+      "scale": {
+        "mode": "Linear",
+        "rawLow": 0,
+        "rawHigh": 1,
+        "scaledLow": 0,
+        "scaledHigh": 0.1
+      },
+      "confidence": "medium",
+      "ss40k": {
+        "name": "SystemTotalVoltage",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemCurrent",
+      "description": "System current, 0.1A/bit, offset -1600.0A",
+      "category": "Telemetry",
+      "pollClass": "fast",
+      "function": "IRUS",
+      "address": 3,
+      "scale": {
+        "mode": "Linear",
+        "rawLow": 0,
+        "rawHigh": 1,
+        "scaledLow": -1600,
+        "scaledHigh": -1599.9
+      },
+      "confidence": "medium",
+      "ss40k": {
+        "name": "SystemCurrent",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemSOC",
+      "description": "System SOC",
+      "category": "Telemetry",
+      "pollClass": "fast",
+      "function": "IRUS",
+      "address": 4,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "SystemSOC",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemSOH",
+      "description": "System SOH",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 5,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "SystemSOH",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "MaxBatteryVoltage",
+      "description": "Maximum battery voltage, 0.001V/bit",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 6,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "MaxBatteryVoltage",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "MaxBatteryVoltageStringNo",
+      "description": "String # holding the maximum battery voltage",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 7,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "MaxBatteryVoltageStringNo",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "MaxBatteryVoltagePointNo",
+      "description": "Point # of the maximum battery voltage within its string",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 8,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "MaxBatteryVoltagePointNo",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "MinBatteryVoltage",
+      "description": "Minimum battery voltage, 0.001V/bit",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 9,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "MinBatteryVoltage",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "MinBatteryVoltageStringNo",
+      "description": "String # holding the minimum battery voltage",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 10,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "MinBatteryVoltageStringNo",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "MinBatteryVoltagePointNo",
+      "description": "Point # of the minimum battery voltage within its string",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 11,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "MinBatteryVoltagePointNo",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "MaxBatteryTemperature",
+      "description": "Maximum battery temperature, 1/bit, offset -40",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 12,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "MaxBatteryTemperature",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "MaxBatteryTemperatureStringNo",
+      "description": "String # holding the maximum battery temperature",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 13,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "MaxBatteryTemperatureStringNo",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "MaxBatteryTemperaturePointNo",
+      "description": "Point # of the maximum battery temperature within its string",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 14,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "MaxBatteryTemperaturePointNo",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "MinBatteryTemperature",
+      "description": "Minimum battery temperature, 1/bit, offset -40",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 15,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "MinBatteryTemperature",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "MinBatteryTemperatureStringNo",
+      "description": "String # holding the minimum battery temperature",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 16,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "MinBatteryTemperatureStringNo",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "MinBatteryTemperaturePointNo",
+      "description": "Point # of the minimum battery temperature within its string",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 17,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "MinBatteryTemperaturePointNo",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "AccumulatedChargeCapacity",
+      "description": "System accumulated charging capacity, 0.1kWh/bit",
+      "category": "Telemetry",
+      "pollClass": "slow",
+      "function": "IRUI",
+      "address": 18,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "AccumulatedChargeCapacity",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "AccumulatedDischargeCapacity",
+      "description": "System accumulated discharging capacity, 0.1kWh/bit",
+      "category": "Telemetry",
+      "pollClass": "slow",
+      "function": "IRUI",
+      "address": 20,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "AccumulatedDischargeCapacity",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "AccumulatedChargeSingleCycle",
+      "description": "System accumulated charge quantity for a single cycle, 0.1kWh/bit",
+      "category": "Telemetry",
+      "pollClass": "slow",
+      "function": "IRUI",
+      "address": 22,
+      "confidence": "low",
+      "ss40k": {
+        "name": "AccumulatedChargeSingleCycle",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "AccumulatedDischargeSingleCycle",
+      "description": "System accumulated discharge quantity for a single cycle, 0.1kWh/bit",
+      "category": "Telemetry",
+      "pollClass": "slow",
+      "function": "IRUI",
+      "address": 24,
+      "confidence": "low",
+      "ss40k": {
+        "name": "AccumulatedDischargeSingleCycle",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "RechargeableCapacity",
+      "description": "System rechargeable capacity, 0.1kW/bit",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 32,
+      "confidence": "low",
+      "ss40k": {
+        "name": "RechargeableCapacity",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "DischargeCapacity",
+      "description": "System discharge capacity, 0.1kW/bit",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 33,
+      "confidence": "low",
+      "ss40k": {
+        "name": "DischargeCapacity",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "AllowableMaxChargePower",
+      "description": "Allowable maximum charge power, 0.1kW/bit",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 34,
+      "confidence": "low",
+      "ss40k": {
+        "name": "AllowableMaxChargePower",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "AllowableMaxDischargePower",
+      "description": "Allowable maximum discharge power, 0.1A/bit, offset -1600.0A",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 35,
+      "confidence": "low",
+      "ss40k": {
+        "name": "AllowableMaxDischargePower",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "AllowableMaxChargeCurrent",
+      "description": "Allowable maximum charge current",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 36,
+      "confidence": "low",
+      "ss40k": {
+        "name": "AllowableMaxChargeCurrent",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "AllowableMaxDischargeCurrent",
+      "description": "Allowable maximum discharge current",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 37,
+      "confidence": "low",
+      "ss40k": {
+        "name": "AllowableMaxDischargeCurrent",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "OperatingTemperature",
+      "description": "Operating temperature, 1/bit, offset -40",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 42,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "OperatingTemperature",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemState",
+      "description": "BMS / System State",
+      "category": "Status",
+      "pollClass": "fast",
+      "function": "IRUS",
+      "address": 43,
+      "confidence": "high",
+      "enumStatus": {
+        "0": "Initial state",
+        "1": "Charging",
+        "2": "Discharging",
+        "3": "Ready",
+        "4": "Cluster maintenance",
+        "5": "Charge prohibited",
+        "6": "Discharge prohibited",
+        "7": "Charging and discharging prohibited",
+        "8": "Fault",
+        "9": "Fault recovery",
+        "10": "Test mode",
+        "11": "Power-off",
+        "12": "Power-off complete"
+      },
+      "ss40k": {
+        "name": "SystemState",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "ChargeDischargeState",
+      "description": "Charge/discharge state",
+      "category": "Status",
+      "pollClass": "fast",
+      "function": "IRUS",
+      "address": 44,
+      "confidence": "medium",
+      "enumStatus": {
+        "0": "Other",
+        "1": "Discharge",
+        "2": "Charge"
+      },
+      "ss40k": {
+        "name": "ChargeDischargeState",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "InsulationResistance",
+      "description": "System insulation resistance, 1KΩ/bit",
+      "category": "Telemetry",
+      "pollClass": "normal",
+      "function": "IRUS",
+      "address": 45,
+      "confidence": "medium",
+      "ss40k": {
+        "name": "InsulationResistance",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "PcsBmsCommFault",
+      "description": "PCS <-> BMS communication failure",
+      "category": "Faults",
+      "pollClass": "fast",
+      "function": "IRUS",
+      "address": 46,
+      "alarmFlag": true,
+      "confidence": "high",
+      "enumStatus": {
+        "0": "Normal",
+        "1": "Communication loss"
+      },
+      "ss40k": {
+        "name": "PcsBmsCommFault",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "EmsBmsCommFault",
+      "description": "EMS <-> BMS communication failure",
+      "category": "Faults",
+      "pollClass": "fast",
+      "function": "IRUS",
+      "address": 47,
+      "alarmFlag": true,
+      "confidence": "high",
+      "enumStatus": {
+        "0": "Normal",
+        "1": "Communication loss"
+      },
+      "ss40k": {
+        "name": "EmsBmsCommFault",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "PileCumulativeChargingTime",
+      "description": "Pile cumulative charging time, seconds",
+      "category": "Telemetry",
+      "pollClass": "slow",
+      "function": "IRUI",
+      "address": 48,
+      "confidence": "low",
+      "ss40k": {
+        "name": "PileCumulativeChargingTime",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "PileCumulativeDischargingTime",
+      "description": "Pile cumulative discharging time, seconds",
+      "category": "Telemetry",
+      "pollClass": "slow",
+      "function": "IRUI",
+      "address": 50,
+      "confidence": "low",
+      "ss40k": {
+        "name": "PileCumulativeDischargingTime",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_1_Total_voltage_undervoltage_slight",
+      "description": "Total voltage undervoltage slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 1,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_1_Total_voltage_undervoltage_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_2_Total_voltage_undervoltage_medium",
+      "description": "Total voltage undervoltage medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 2,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_2_Total_voltage_undervoltage_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_3_Total_voltage_undervoltage_serious",
+      "description": "Total voltage undervoltage serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 3,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_3_Total_voltage_undervoltage_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_4_Total_voltage_overvoltage_slight",
+      "description": "Total voltage overvoltage slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 4,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_4_Total_voltage_overvoltage_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_5_Total_voltage_overvoltage_medium",
+      "description": "Total voltage overvoltage medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 5,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_5_Total_voltage_overvoltage_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_6_Total_voltage_overvoltage_serious",
+      "description": "Total voltage overvoltage serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 6,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_6_Total_voltage_overvoltage_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_7_Overcurrent_slight",
+      "description": "Overcurrent slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 7,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_7_Overcurrent_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_8_Overcurrent_medium",
+      "description": "Overcurrent medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 8,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_8_Overcurrent_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_9_Overcurrent_serious",
+      "description": "Overcurrent serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 9,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_9_Overcurrent_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_10_Low_insulation_resistance_slight",
+      "description": "Low insulation resistance slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 10,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_10_Low_insulation_resistance_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_11_Low_insulation_resistance_medium",
+      "description": "Low insulation resistance medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 11,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_11_Low_insulation_resistance_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_12_Low_insulation_resistance_serious",
+      "description": "Low insulation resistance serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 12,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_12_Low_insulation_resistance_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_13_Module_low_temperature_slight",
+      "description": "Module low temperature slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 13,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_13_Module_low_temperature_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_14_Module_low_temperature_medium",
+      "description": "Module low temperature medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 14,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_14_Module_low_temperature_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_15_Module_low_temperature_serious",
+      "description": "Module low temperature serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 15,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_15_Module_low_temperature_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_16_Module_over_temperature_slight",
+      "description": "Module over temperature slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 16,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_16_Module_over_temperature_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_17_Module_over_temperature_medium",
+      "description": "Module over temperature medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 17,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_17_Module_over_temperature_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_18_Module_over_temperature_serious",
+      "description": "Module over temperature serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 18,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_18_Module_over_temperature_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_19_Cell_overvoltage_slight",
+      "description": "Cell overvoltage slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 19,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_19_Cell_overvoltage_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_20_Cell_overvoltage_medium",
+      "description": "Cell overvoltage medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 20,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_20_Cell_overvoltage_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_21_Cell_overvoltage_serious",
+      "description": "Cell overvoltage serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 21,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_21_Cell_overvoltage_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_22_Cell_undervoltage_slight",
+      "description": "Cell undervoltage slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 22,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_22_Cell_undervoltage_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_23_Cell_undervoltage_medium",
+      "description": "Cell undervoltage medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 23,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_23_Cell_undervoltage_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_24_Cell_undervoltage_serious",
+      "description": "Cell undervoltage serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 24,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_24_Cell_undervoltage_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_25_Cell_voltage_differential_slight",
+      "description": "Cell voltage differential slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 25,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_25_Cell_voltage_differential_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_26_Cell_voltage_differential_medium",
+      "description": "Cell voltage differential medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 26,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_26_Cell_voltage_differential_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_27_Cell_voltage_differential_serious",
+      "description": "Cell voltage differential serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 27,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_27_Cell_voltage_differential_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_28_Cell_low_temperature_slight",
+      "description": "Cell low temperature slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 28,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_28_Cell_low_temperature_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_29_Cell_low_temperature_medium",
+      "description": "Cell low temperature medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 29,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_29_Cell_low_temperature_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_30_Cell_low_temperature_serious",
+      "description": "Cell low temperature serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 30,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_30_Cell_low_temperature_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_31_Cell_over_temperature_slight",
+      "description": "Cell over temperature slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 31,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_31_Cell_over_temperature_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_32_Cell_over_temperature_medium",
+      "description": "Cell over temperature medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 32,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_32_Cell_over_temperature_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_33_Cell_over_temperature_serious",
+      "description": "Cell over temperature serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 33,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_33_Cell_over_temperature_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_34_Cell_temperature_differential_slight",
+      "description": "Cell temperature differential slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 34,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_34_Cell_temperature_differential_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_35_Cell_temperature_differential_medium",
+      "description": "Cell temperature differential medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 35,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_35_Cell_temperature_differential_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_36_Cell_temperature_differential_serious",
+      "description": "Cell temperature differential serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 36,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_36_Cell_temperature_differential_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_37_Cell_SOC_low_slight",
+      "description": "Cell SOC low slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 37,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_37_Cell_SOC_low_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_38_Cell_SOC_low_medium",
+      "description": "Cell SOC low medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 38,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_38_Cell_SOC_low_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_39_Cell_SOC_low_serious",
+      "description": "Cell SOC low serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 39,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_39_Cell_SOC_low_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_40_Cell_SOC_high_slight",
+      "description": "Cell SOC high slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 40,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_40_Cell_SOC_high_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_41_Cell_SOC_high_medium",
+      "description": "Cell SOC high medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 41,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_41_Cell_SOC_high_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_42_Cell_SOC_high_serious",
+      "description": "Cell SOC high serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 42,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_42_Cell_SOC_high_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_43_Cell_SOH_low_slight",
+      "description": "Cell SOH low slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 43,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_43_Cell_SOH_low_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_44_Cell_SOH_low_medium",
+      "description": "Cell SOH low medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 44,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_44_Cell_SOH_low_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_45_Cell_SOH_low_serious",
+      "description": "Cell SOH low serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 45,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_45_Cell_SOH_low_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_46_Cell_SOH_high_slight",
+      "description": "Cell SOH high slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 46,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_46_Cell_SOH_high_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_47_Cell_SOH_high_medium",
+      "description": "Cell SOH high medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 47,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_47_Cell_SOH_high_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_48_Cell_SOH_high_serious",
+      "description": "Cell SOH high serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 48,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_48_Cell_SOH_high_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_49_ESBCM_lost_communication",
+      "description": "ESBCM lost communication",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 49,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_49_ESBCM_lost_communication",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_50_ESBMM_lost_communication",
+      "description": "ESBMM lost communication",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 50,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_50_ESBMM_lost_communication",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_51_Abnormal_voltage_between_strings_diff_20V",
+      "description": "Abnormal voltage between strings (diff > 20V)",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 51,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_51_Abnormal_voltage_between_strings_diff_20V",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_52_Abnormal_disconnection_of_contactor",
+      "description": "Abnormal disconnection of contactor",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 52,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_52_Abnormal_disconnection_of_contactor",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_53_Abnormal_closing_of_contactor",
+      "description": "Abnormal closing of contactor",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 53,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_53_Abnormal_closing_of_contactor",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_54_Charging_prohibited",
+      "description": "Charging prohibited",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 54,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_54_Charging_prohibited",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_55_Discharging_prohibited",
+      "description": "Discharging prohibited",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 55,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_55_Discharging_prohibited",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_56_BMS_system_alarm_summary",
+      "description": "BMS system alarm summary",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 56,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_56_BMS_system_alarm_summary",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_57_BMS_system_fault_summary",
+      "description": "BMS system fault summary",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 57,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_57_BMS_system_fault_summary",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_58_Digital_input_IN0",
+      "description": "Digital input IN0",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 58,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_58_Digital_input_IN0",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_59_Digital_input_IN1",
+      "description": "Digital input IN1",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 59,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_59_Digital_input_IN1",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_60_Digital_input_IN2",
+      "description": "Digital input IN2",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 60,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_60_Digital_input_IN2",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_61_Digital_input_IN3",
+      "description": "Digital input IN3",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 61,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_61_Digital_input_IN3",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_62_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 62,
+      "alarmFlag": false,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_62_Reserved",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_63_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 63,
+      "alarmFlag": false,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_63_Reserved",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_64_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 64,
+      "alarmFlag": false,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_64_Reserved",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_65_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 65,
+      "alarmFlag": false,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_65_Reserved",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_66_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 66,
+      "alarmFlag": false,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_66_Reserved",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_67_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 67,
+      "alarmFlag": false,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_67_Reserved",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_68_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 68,
+      "alarmFlag": false,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_68_Reserved",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_69_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 69,
+      "alarmFlag": false,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_69_Reserved",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_70_Terminal_over_temperature_slight",
+      "description": "Terminal over temperature slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 70,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_70_Terminal_over_temperature_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_71_Terminal_over_temperature_medium",
+      "description": "Terminal over temperature medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 71,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_71_Terminal_over_temperature_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_72_Terminal_over_temperature_serious",
+      "description": "Terminal over temperature serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 72,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_72_Terminal_over_temperature_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_73_Pack_voltage_overvoltage_slight",
+      "description": "Pack voltage overvoltage slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 73,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_73_Pack_voltage_overvoltage_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_74_Pack_voltage_overvoltage_medium",
+      "description": "Pack voltage overvoltage medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 74,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_74_Pack_voltage_overvoltage_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_75_Pack_voltage_overvoltage_serious",
+      "description": "Pack voltage overvoltage serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 75,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_75_Pack_voltage_overvoltage_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_76_Pack_voltage_undervoltage_slight",
+      "description": "Pack voltage undervoltage slight",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 76,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_76_Pack_voltage_undervoltage_slight",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_77_Pack_voltage_undervoltage_medium",
+      "description": "Pack voltage undervoltage medium",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 77,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_77_Pack_voltage_undervoltage_medium",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_78_Pack_voltage_undervoltage_serious",
+      "description": "Pack voltage undervoltage serious",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 78,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_78_Pack_voltage_undervoltage_serious",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_79_Cell_voltage_acquisition_fault",
+      "description": "Cell voltage acquisition fault",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 79,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_79_Cell_voltage_acquisition_fault",
+        "model": "TODO"
+      }
+    },
+    {
+      "id": "SystemAlarm_80_Cell_temperature_acquisition_fault",
+      "description": "Cell temperature acquisition fault",
+      "category": "Faults",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 80,
+      "alarmFlag": true,
+      "confidence": "medium",
+      "notes": "NOT YET POLLABLE: this is a true Modbus discrete-input register (function 02H). keystone-controller-logic's ModbusNumericType (src/types.ts) currently has no discrete-input member (only HR*/IR*/C) and reader.ts has no 02H request path — needs a core-library change before this point can actually be read. 'function' is set to the intended code 'DI' as a marker.",
+      "ss40k": {
+        "name": "alm_80_Cell_temperature_acquisition_fault",
+        "model": "TODO"
+      }
+    }
+  ],
+  "commands": [
+    {
+      "id": "StringNumberSelector",
+      "description": "Selects which battery string subsequent per-string commands target (1-20)",
+      "function": "HRUS",
+      "address": 500,
+      "readback": true,
+      "confidence": "high"
+    },
+    {
+      "id": "SystemFaultReset",
+      "description": "System fault reset: 0 = do not reset, 1 = reset, other = invalid",
+      "function": "HRUS",
+      "address": 501,
+      "readback": false,
+      "confidence": "high"
+    },
+    {
+      "id": "MainCircuitBreakerControl",
+      "description": "Main circuit breaker/contactor control: 0 = no operation, 1 = close, 2 = open, other = invalid",
+      "function": "HRUS",
+      "address": 502,
+      "readback": true,
+      "confidence": "high"
+    },
+    {
+      "id": "SystemPowerUpDownControl_TODO",
+      "description": "TODO: garbled in source PDF extraction (range 503, or 504-523 one register per string?) - verify against PDF p. A336 before use.",
+      "function": "HRUS",
+      "address": 503,
+      "readback": true,
+      "confidence": "low"
+    },
+    {
+      "id": "StringMaintenanceModeControl",
+      "description": "String N (selected via StringNumberSelector/500) maintenance mode: 0 = no operation, 1 = power on, 2 = power off. Registers 525-527 appear adjacent in the source; unclear if distinct fields or padding - verify against PDF p. A336.",
+      "function": "HRUS",
+      "address": 524,
+      "readback": true,
+      "confidence": "medium"
+    },
+    {
+      "id": "RtcAndHeartbeat_TODO",
+      "description": "TODO: genuinely garbled in source extraction - RTC year/month/day/hour/minute/second + a heartbeat register, somewhere across 528-530. Needs a direct look at PDF p. A336-A337 before use.",
+      "function": "HRUS",
+      "address": 528,
+      "readback": true,
+      "confidence": "low"
+    }
+  ]
+}
