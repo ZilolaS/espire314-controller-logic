@@ -1,0 +1,1205 @@
+{
+  "_comment": "eSpire 314 (ESMU) system-level discrete-input alarm map, function code 02H, addresses 1-80. See docs/eSpire314_ESMU_Modbus_Register_Map.md section 4.1 for confidence notes and source PDF page references.",
+  "points": [
+    {
+      "id": "SystemAlarm_1_Total_voltage_undervoltage_slight",
+      "description": "Total voltage undervoltage slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 1,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_2_Total_voltage_undervoltage_medium",
+      "description": "Total voltage undervoltage medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 2,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_3_Total_voltage_undervoltage_serious",
+      "description": "Total voltage undervoltage serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 3,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_4_Total_voltage_overvoltage_slight",
+      "description": "Total voltage overvoltage slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 4,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_5_Total_voltage_overvoltage_medium",
+      "description": "Total voltage overvoltage medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 5,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_6_Total_voltage_overvoltage_serious",
+      "description": "Total voltage overvoltage serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 6,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_7_Overcurrent_slight",
+      "description": "Overcurrent slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 7,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_8_Overcurrent_medium",
+      "description": "Overcurrent medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 8,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_9_Overcurrent_serious",
+      "description": "Overcurrent serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 9,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_10_Low_insulation_resistance_slight",
+      "description": "Low insulation resistance slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 10,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_11_Low_insulation_resistance_medium",
+      "description": "Low insulation resistance medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 11,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_12_Low_insulation_resistance_serious",
+      "description": "Low insulation resistance serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 12,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_13_Module_low_temperature_slight",
+      "description": "Module low temperature slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 13,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_14_Module_low_temperature_medium",
+      "description": "Module low temperature medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 14,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_15_Module_low_temperature_serious",
+      "description": "Module low temperature serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 15,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_16_Module_over_temperature_slight",
+      "description": "Module over temperature slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 16,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_17_Module_over_temperature_medium",
+      "description": "Module over temperature medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 17,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_18_Module_over_temperature_serious",
+      "description": "Module over temperature serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 18,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_19_Cell_overvoltage_slight",
+      "description": "Cell overvoltage slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 19,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_20_Cell_overvoltage_medium",
+      "description": "Cell overvoltage medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 20,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_21_Cell_overvoltage_serious",
+      "description": "Cell overvoltage serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 21,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_22_Cell_undervoltage_slight",
+      "description": "Cell undervoltage slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 22,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_23_Cell_undervoltage_medium",
+      "description": "Cell undervoltage medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 23,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_24_Cell_undervoltage_serious",
+      "description": "Cell undervoltage serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 24,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_25_Cell_voltage_differential_slight",
+      "description": "Cell voltage differential slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 25,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_26_Cell_voltage_differential_medium",
+      "description": "Cell voltage differential medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 26,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_27_Cell_voltage_differential_serious",
+      "description": "Cell voltage differential serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 27,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_28_Cell_low_temperature_slight",
+      "description": "Cell low temperature slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 28,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_29_Cell_low_temperature_medium",
+      "description": "Cell low temperature medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 29,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_30_Cell_low_temperature_serious",
+      "description": "Cell low temperature serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 30,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_31_Cell_over_temperature_slight",
+      "description": "Cell over temperature slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 31,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_32_Cell_over_temperature_medium",
+      "description": "Cell over temperature medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 32,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_33_Cell_over_temperature_serious",
+      "description": "Cell over temperature serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 33,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_34_Cell_temperature_differential_slight",
+      "description": "Cell temperature differential slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 34,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_35_Cell_temperature_differential_medium",
+      "description": "Cell temperature differential medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 35,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_36_Cell_temperature_differential_serious",
+      "description": "Cell temperature differential serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 36,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_37_Cell_SOC_low_slight",
+      "description": "Cell SOC low slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 37,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_38_Cell_SOC_low_medium",
+      "description": "Cell SOC low medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 38,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_39_Cell_SOC_low_serious",
+      "description": "Cell SOC low serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 39,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_40_Cell_SOC_high_slight",
+      "description": "Cell SOC high slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 40,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_41_Cell_SOC_high_medium",
+      "description": "Cell SOC high medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 41,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_42_Cell_SOC_high_serious",
+      "description": "Cell SOC high serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 42,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_43_Cell_SOH_low_slight",
+      "description": "Cell SOH low slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 43,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_44_Cell_SOH_low_medium",
+      "description": "Cell SOH low medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 44,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_45_Cell_SOH_low_serious",
+      "description": "Cell SOH low serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 45,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_46_Cell_SOH_high_slight",
+      "description": "Cell SOH high slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 46,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_47_Cell_SOH_high_medium",
+      "description": "Cell SOH high medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 47,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_48_Cell_SOH_high_serious",
+      "description": "Cell SOH high serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 48,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_49_ESBCM_lost_communication",
+      "description": "ESBCM lost communication",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 49,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_50_ESBMM_lost_communication",
+      "description": "ESBMM lost communication",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 50,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_51_Abnormal_voltage_between_strings_diff_20V",
+      "description": "Abnormal voltage between strings (diff > 20V)",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 51,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_52_Abnormal_disconnection_of_contactor",
+      "description": "Abnormal disconnection of contactor",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 52,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_53_Abnormal_closing_of_contactor",
+      "description": "Abnormal closing of contactor",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 53,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_54_Charging_prohibited",
+      "description": "Charging prohibited",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 54,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_55_Discharging_prohibited",
+      "description": "Discharging prohibited",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 55,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_56_BMS_system_alarm_summary",
+      "description": "BMS system alarm summary",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 56,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_57_BMS_system_fault_summary",
+      "description": "BMS system fault summary",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 57,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_58_Digital_input_IN0",
+      "description": "Digital input IN0",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 58,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_59_Digital_input_IN1",
+      "description": "Digital input IN1",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 59,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_60_Digital_input_IN2",
+      "description": "Digital input IN2",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 60,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_61_Digital_input_IN3",
+      "description": "Digital input IN3",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 61,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_62_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 62,
+      "alarm": false,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_63_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 63,
+      "alarm": false,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_64_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 64,
+      "alarm": false,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_65_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 65,
+      "alarm": false,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_66_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 66,
+      "alarm": false,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_67_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 67,
+      "alarm": false,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_68_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 68,
+      "alarm": false,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_69_Reserved",
+      "description": "Reserved",
+      "category": "Reserved",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 69,
+      "alarm": false,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_70_Terminal_over_temperature_slight",
+      "description": "Terminal over temperature slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 70,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_71_Terminal_over_temperature_medium",
+      "description": "Terminal over temperature medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 71,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_72_Terminal_over_temperature_serious",
+      "description": "Terminal over temperature serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 72,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_73_Pack_voltage_overvoltage_slight",
+      "description": "Pack voltage overvoltage slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 73,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_74_Pack_voltage_overvoltage_medium",
+      "description": "Pack voltage overvoltage medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 74,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_75_Pack_voltage_overvoltage_serious",
+      "description": "Pack voltage overvoltage serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 75,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_76_Pack_voltage_undervoltage_slight",
+      "description": "Pack voltage undervoltage slight",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 76,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_77_Pack_voltage_undervoltage_medium",
+      "description": "Pack voltage undervoltage medium",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 77,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_78_Pack_voltage_undervoltage_serious",
+      "description": "Pack voltage undervoltage serious",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 78,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_79_Cell_voltage_acquisition_fault",
+      "description": "Cell voltage acquisition fault",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 79,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    },
+    {
+      "id": "SystemAlarm_80_Cell_temperature_acquisition_fault",
+      "description": "Cell temperature acquisition fault",
+      "category": "Alarms",
+      "pollClass": "normal",
+      "function": "DI",
+      "address": 80,
+      "alarm": true,
+      "confidence": "medium",
+      "_sourceNote": "docs/eSpire314_ESMU_Modbus_Register_Map.md §4.1 — order reliable, verify exact address before safety-critical use",
+      "meanings": {
+        "0": "No alarm",
+        "1": "Alarm"
+      }
+    }
+  ]
+}

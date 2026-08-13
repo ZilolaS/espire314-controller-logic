@@ -1,41 +1,53 @@
 // src/coreControl/espire314FaultRecovery.ts
 //
-// SCAFFOLD — the state machine shape (safe-zero -> clear-fault -> start ->
-// verify -> lockout) is carried over from keystone-controller-logic's
-// src/coreControl/miniFaultRecovery.ts, which is the closest existing
-// pattern for a PCS fault/auto-recovery sequencer in this codebase.
+// Fault classification + recovery sequencer for the eSpire 314 (ESMU battery
+// stack controller). Built from the real register semantics in
+// docs/eSpire314_ESMU_Modbus_Register_Map.md — NOT a copy of Mini's PCS
+// state machine. Key difference from keystone-controller-logic's
+// miniFaultRecovery.ts: ESMU already tracks its own fault lifecycle in the
+// System State input register (43): Fault (0x08) -> Fault recovery (0x09) ->
+// back to a normal state once cleared. So the controller's job is mostly to
+// detect the Fault state, pulse the fault-reset holding register (501), wait
+// for the device to settle, and check again — not to choreograph a
+// multi-step clear/start sequence the way a PCS requires.
 //
-// What is NOT carried over on purpose: Mini-specific topology (PVDC combiner
-// clear/start steps, BMS-HV/LV split faults) and Mini-specific tagIDs
-// ("TotalStart", "PVDCClearFault", ...). eSpire 314's actual fault sources,
-// write-point tagIDs, and whether it even has a PV-DC stage are unknown
-// until the eSpire 314 Modbus register map is reviewed. Every place that
-// assumes something Mini-specific is marked TODO below — fill in from the
-// register map, then delete this comment block.
+// Confidence: System State (43), BMS fault summary (DI 57), contactor
+// abnormal open/close (DI 52/53), and control registers 501/502 are all
+// HIGH confidence per the register map doc. PCS/EMS comm-fault registers
+// (IR 46/47) are also HIGH confidence but are treated as non-recoverable
+// here since a register write can't fix a communication link.
 
 import type { ControlEnvelope } from "../writer/writer";
 
 export interface Espire314FaultTelemetry {
-  pcsFault?: unknown;
-  gridFault?: unknown;
-  backupFault?: unknown;
-  bmsFault?: unknown;
-  fireAlarm?: unknown;
+  /** Input register 43 — BMS/System State enum, 0-12. */
+  systemState?: number;
+  /** Discrete input 57 — BMS system fault summary. */
+  bmsFaultSummary?: unknown;
+  /** Discrete input 56 — BMS system alarm summary (informational, less severe than fault). */
+  bmsAlarmSummary?: unknown;
+  /** Discrete input 52 — abnormal disconnection of contactor. */
+  contactorOpenFault?: unknown;
+  /** Discrete input 53 — abnormal closing of contactor. */
+  contactorCloseFault?: unknown;
+  /** Discrete input 54 — charging prohibited. */
+  chargeProhibited?: unknown;
+  /** Discrete input 55 — discharging prohibited. */
+  dischargeProhibited?: unknown;
+  /** Input register 46 — PCS<->BMS communication failure. Not auto-recoverable. */
+  pcsBmsCommFault?: unknown;
+  /** Input register 47 — EMS<->BMS communication failure. Not auto-recoverable. */
+  emsBmsCommFault?: unknown;
   criticalTelemetryMissing?: boolean;
-  // TODO: add/rename fault channels once the register map's fault/status
-  // words (and their bit meanings) are known — see keystone-controller-logic's
-  // ss50k_minispecific.yaml-equivalent for the pattern (one bitfield word per
-  // ss40k point, decoded meaning-by-bit).
 }
 
 export interface Espire314FaultClassification {
   faulted: boolean;
   recoverable: boolean;
-  pcsFault: boolean;
   bmsFault: boolean;
-  gridFault: boolean;
-  backupFault: boolean;
-  fireAlarm: boolean;
+  contactorFault: boolean;
+  commFault: boolean;
+  chargeDischargeProhibited: boolean;
   criticalTelemetryMissing: boolean;
   reasons: string[];
 }
@@ -43,9 +55,7 @@ export interface Espire314FaultClassification {
 export type Espire314FaultRecoveryMode =
   | "normal"
   | "fault-detected"
-  | "safe-zero"
-  | "clear-pcs-fault"
-  | "start-pcs"
+  | "reset-sent"
   | "verify-recovered"
   | "lockout";
 
@@ -57,9 +67,8 @@ export interface Espire314FaultRecoveryState {
 }
 
 export type Espire314FaultRecoveryCommand =
-  | { kind: "safe-zero" }
-  | { kind: "pcs-clear-fault" }
-  | { kind: "pcs-start" };
+  | { kind: "fault-reset" }
+  | { kind: "open-breaker" };
 
 export interface Espire314FaultRecoveryOptions {
   maxAttempts?: number;
@@ -75,46 +84,51 @@ export interface Espire314FaultRecoveryResult {
 }
 
 export interface Espire314FaultRecoveryWriterOptions {
-  pcsTopic?: string;
+  topic?: string;
 }
 
 const DEFAULT_MAX_ATTEMPTS = 3;
 const DEFAULT_RETRY_MS = 2_000;
 const DEFAULT_SETTLE_MS = 5_000;
 
+/** System State (input register 43) value for "Fault" — see register map doc §6.3. */
+const SYSTEM_STATE_FAULT = 8;
+/** System State value for "Fault recovery" (device is clearing the fault itself). */
+const SYSTEM_STATE_FAULT_RECOVERY = 9;
+
 export function classifyEspire314Faults(
   telemetry: Espire314FaultTelemetry
 ): Espire314FaultClassification {
-  const pcsFault = isActive(telemetry.pcsFault);
-  const gridFault = isActive(telemetry.gridFault);
-  const backupFault = isActive(telemetry.backupFault);
-  const bmsFault = isActive(telemetry.bmsFault);
-  const fireAlarm = isActive(telemetry.fireAlarm);
+  const bmsFault =
+    isActive(telemetry.bmsFaultSummary) ||
+    telemetry.systemState === SYSTEM_STATE_FAULT;
+  const contactorFault =
+    isActive(telemetry.contactorOpenFault) || isActive(telemetry.contactorCloseFault);
+  const commFault =
+    isActive(telemetry.pcsBmsCommFault) || isActive(telemetry.emsBmsCommFault);
+  const chargeDischargeProhibited =
+    isActive(telemetry.chargeProhibited) || isActive(telemetry.dischargeProhibited);
   const criticalTelemetryMissing = telemetry.criticalTelemetryMissing === true;
-  const reasons: string[] = [];
 
-  if (pcsFault) reasons.push("espire314-pcs-fault");
-  if (gridFault) reasons.push("espire314-grid-fault");
-  if (backupFault) reasons.push("espire314-backup-fault");
+  const reasons: string[] = [];
   if (bmsFault) reasons.push("espire314-bms-fault");
-  if (fireAlarm) reasons.push("espire314-fire-alarm");
+  if (contactorFault) reasons.push("espire314-contactor-fault");
+  if (commFault) reasons.push("espire314-comm-fault");
+  if (chargeDischargeProhibited) reasons.push("espire314-charge-discharge-prohibited");
   if (criticalTelemetryMissing) reasons.push("espire314-critical-telemetry-missing");
 
   const faulted = reasons.length > 0;
-  // TODO: confirm which fault classes are safe to auto-recover for eSpire 314.
-  // Mirroring Mini's policy for now: fire alarm, missing telemetry, and BMS
-  // faults are never auto-recovered.
-  const recoverable =
-    faulted && !fireAlarm && !criticalTelemetryMissing && !bmsFault;
+  // Comm faults aren't fixable by a register write (external link issue), and
+  // missing telemetry means we can't safely judge state — never auto-recover those.
+  const recoverable = faulted && !commFault && !criticalTelemetryMissing;
 
   return {
     faulted,
     recoverable,
-    pcsFault,
     bmsFault,
-    gridFault,
-    backupFault,
-    fireAlarm,
+    contactorFault,
+    commFault,
+    chargeDischargeProhibited,
     criticalTelemetryMissing,
     reasons,
   };
@@ -138,6 +152,13 @@ export function evaluateEspire314FaultRecovery(
     attempts: previousState.attempts || 0,
   };
 
+  // The device itself may still be mid-recovery (System State 0x09) even
+  // though the fault bits haven't cleared yet — don't fight it, just wait.
+  if (telemetry.systemState === SYSTEM_STATE_FAULT_RECOVERY && state.mode !== "normal") {
+    reasons.push("espire314-device-self-recovering");
+    return { state, commands, classification, reasons };
+  }
+
   if (!classification.faulted) {
     if (state.mode !== "normal") reasons.push("espire314-fault-recovered");
     return {
@@ -149,7 +170,7 @@ export function evaluateEspire314FaultRecovery(
   }
 
   if (!classification.recoverable || state.attempts >= maxAttempts) {
-    commands.push({ kind: "safe-zero" });
+    commands.push({ kind: "open-breaker" });
     return {
       state: { ...state, mode: "lockout" },
       commands,
@@ -166,35 +187,19 @@ export function evaluateEspire314FaultRecovery(
   switch (state.mode) {
     case "normal":
     case "fault-detected":
-      state.mode = "safe-zero";
-      state.attempts += 1;
-      commands.push({ kind: "safe-zero" });
-      reasons.push("espire314-recovery-safe-zero");
-      break;
-
-    case "safe-zero":
-      state.mode = "clear-pcs-fault";
-      state.lastSendMs = undefined;
-      reasons.push("espire314-recovery-clear-next");
-      break;
-
-    case "clear-pcs-fault":
       if (readyToRetry(state, nowMs, retryMs)) {
-        commands.push({ kind: "pcs-clear-fault" });
+        commands.push({ kind: "fault-reset" });
+        state.attempts += 1;
         state.lastSendMs = nowMs;
-        state.mode = "start-pcs";
-        reasons.push("espire314-recovery-pcs-clear");
+        state.mode = "reset-sent";
+        reasons.push("espire314-recovery-fault-reset");
       }
       break;
 
-    case "start-pcs":
-      if (readyToRetry(state, nowMs, retryMs)) {
-        commands.push({ kind: "pcs-start" });
-        state.lastSendMs = nowMs;
-        state.mode = "verify-recovered";
-        state.waitUntilMs = nowMs + settleMs;
-        reasons.push("espire314-recovery-pcs-start");
-      }
+    case "reset-sent":
+      state.mode = "verify-recovered";
+      state.waitUntilMs = nowMs + settleMs;
+      reasons.push("espire314-recovery-verify-wait");
       break;
 
     case "verify-recovered":
@@ -207,7 +212,7 @@ export function evaluateEspire314FaultRecovery(
       break;
 
     case "lockout":
-      commands.push({ kind: "safe-zero" });
+      commands.push({ kind: "open-breaker" });
       reasons.push("espire314-recovery-lockout");
       break;
   }
@@ -219,32 +224,24 @@ export function espire314FaultRecoveryCommandsToWriterEnvelopes(
   commands: Espire314FaultRecoveryCommand[],
   options: Espire314FaultRecoveryWriterOptions = {}
 ): ControlEnvelope[] {
-  const pcsPayload: ControlEnvelope["payload"] = [];
+  const payload: ControlEnvelope["payload"] = [];
 
   for (const command of commands) {
     switch (command.kind) {
-      case "safe-zero":
-        // TODO: confirm real tagIDs from the eSpire 314 register map.
-        pcsPayload.push(
-          { tagID: "ActivePowerSetpoint", value: 0 },
-          { tagID: "MaxChgCurrent", value: 0 },
-          { tagID: "MaxDsgCurrent", value: 0 }
-        );
+      case "fault-reset":
+        // Holding register 501 — see docs/eSpire314_ESMU_Modbus_Register_Map.md §5.
+        payload.push({ tagID: "SystemFaultReset", value: 1 });
         break;
-      case "pcs-clear-fault":
-        // TODO: confirm real clear-fault coil/register tagID.
-        pcsPayload.push({ tagID: "ClearFault", value: 1 });
-        break;
-      case "pcs-start":
-        // TODO: confirm real start coil/register tagID.
-        pcsPayload.push({ tagID: "TotalStart", value: 1 });
+      case "open-breaker":
+        // Holding register 502, value 2 = open — see §5.
+        payload.push({ tagID: "MainCircuitBreakerControl", value: 2 });
         break;
     }
   }
 
   const envelopes: ControlEnvelope[] = [];
-  if (pcsPayload.length > 0) {
-    envelopes.push({ topic: options.pcsTopic ?? "PCS", payload: pcsPayload });
+  if (payload.length > 0) {
+    envelopes.push({ topic: options.topic ?? "ESMU", payload });
   }
   return envelopes;
 }
