@@ -1,0 +1,25 @@
+{
+  "name": "espire314-controller-logic",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "directories": {
+    "test": "src/__tests__"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "test": "jest --runInBand --verbose"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "description": "Typed helper library for the eSpire 314 PCS controller (Keystone EMS / Node-RED). Mirrors the structure of keystone-controller-logic; scaffolded ahead of the eSpire 314 Modbus register map.",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^24.10.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {}
+}

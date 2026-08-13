@@ -1,0 +1,12 @@
+# build artifacts & bundles
+dist/
+dist.tar
+node_modules/
+
+# runtime/controller copies
+settings.js
+settings.js.backup
+
+# local deployment/snapshot scratch
+.deploy-*/
+.remote-*
